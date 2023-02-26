@@ -9,12 +9,13 @@ function dj() {
     echo "Example: dj 3.8 r (This will run 'python3.8 manage.py runserver')"
     echo ""
     echo "Command shorthands:"
-    echo "  m1 - Create a new migration"
+    echo "  m1 - Create a new migration."
     echo "  m2 - Apply all pending migrations"
     echo "  r - Start the development server"
   else
     if [ -z "$1" ]; then # If no arguments are passed
-      echo "Please specify the Python version. Usage: dj <python version> <migration step>"
+      echo "Please specify a Python version and command shorthand."
+      echo "For more information, see 'dj help'."
     else
       PY_VERSION=$1
       COMMAND=$2
@@ -27,7 +28,7 @@ function dj() {
       else
         echo "Invalid command shorthand. Please choose from the available options."
         echo ""
-        pm help
+        dj help
       fi
     fi
   fi

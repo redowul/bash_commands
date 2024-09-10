@@ -1,0 +1,6 @@
+alias python3="/usr/local/bin/python3.11"
+alias python="/usr/local/bin/python3.11"
+alias pip="python3.11 -m pip"
+alias dockerkill="docker stop $(docker ps -q)"
+alias zonerm="find . -name '*:Zone.Identifier' -exec rm -f {} \;"
+alias b="bash"

@@ -44,27 +44,19 @@ all_source_files="$entrypoint_file"
 # Function to find headers and corresponding source files
 find_sources() {
     local file=$1
-    echo "Scanning #include headers in $file..."
     
     # Scan the #include headers and clean up any comments or extra text
-    local includes=$(grep -E '^#include\s*".*"' "$file" | sed -E 's/#include "(.*)".*/\1/' | grep -E '^./')
-
-    # Display the found include headers
-    echo "Found headers in $file:"
-    echo "$includes"
+    local includes=$(grep -E '^#include\s*".*"' "$file" | sed -E 's/#include\s+"([^"]+)".*/\1/')
 
     # Loop through each header to find corresponding source files
     for header in $includes; do
-        # Replace /include/ with /src/ in the path and add the base path to locate the corresponding .cpp file
-        local cpp_file=$(echo "$header" | sed 's|^\./include|src|; s|\.h$|.cpp|')
+        # Remove everything before "include" and replace "include" with "src" to form the corresponding .cpp path
+        local cpp_file=$(echo "$header" | sed 's|.*\(/include\)|src|; s|\.h$|.cpp|')
         local full_cpp_path="$src_directory/$cpp_file"  # Correctly concatenate the base path
 
         # If the corresponding .cpp file exists and hasn't been processed, add it to the list
         if [[ -f "$full_cpp_path" && ! "$all_source_files" =~ "$full_cpp_path" ]]; then
-            echo "Found corresponding source file: $full_cpp_path"
             all_source_files="$all_source_files $full_cpp_path"
-        else
-            echo "No corresponding .cpp file found for header: $header"
         fi
     done
 }
@@ -93,8 +85,8 @@ while :; do
 done
 
 # Display the final list of source files to compile
-echo "Final list of source files to compile:"
-echo "$all_source_files"
+# echo "Final list of source files to compile:"
+# echo "$all_source_files"
 
 # Compile the list of source files to .o files in the artifacts directory
 for file in $all_source_files; do
@@ -171,3 +163,4 @@ if [[ "$1" == "-execute" ]]; then
         exit 1
     fi
 fi
+

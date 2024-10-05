@@ -48,3 +48,138 @@ Remember to replace `/path/to/repo` with the actual path to the `django_aliases`
 #Contributions
 
 Feel free to contribute to this repository by creating a pull request. Please provide a description of what your script does, and how to use it.
+
+# gcompile Function for Simplified C++ Compilation
+
+This README provides instructions on using the gcompile function to simplify compiling C++ programs with additional arguments such as linking libraries.
+
+## Compiling for Execution
+
+The gcompile function simplifies the process of compiling C++ programs. It supports specifying the input file, an optional output file, and additional arguments such as linking libraries.
+
+### gcompile
+
+- Compile with Default Output Name:
+
+  `gcompile <input_file>`
+
+  This compiles the <input_file> and creates an executable with the same name (without the extension).
+
+  **Example:**
+
+  `gcompile inputs.cpp`
+
+  **Output:**
+
+  `inputs`  *# Executable created*
+
+---
+
+- Compile with Specified Output Name:
+
+  `gcompile <input_file> <output_file>`
+
+  This compiles the <input_file> and creates an executable with the specified <output_file> name.
+
+  **Example:**
+
+  `gcompile inputs.cpp mynewoutput`
+
+  **Output:**
+
+  `mynewoutput`  *# Executable created*
+
+---
+
+- Compile with Additional Arguments:
+
+  `gcompile <input_file> [output_file] [additional_args]`
+
+  This compiles the <input_file>, optionally specifies the <output_file>, and includes any additional arguments such as linking libraries.
+
+  **Example 1:**
+
+  `gcompile inputs.cpp -lncurses`
+
+  **Output 1:**
+
+  `inputs`  *# Executable created with ncurses linked*
+
+  **Example 2:**
+
+  `gcompile inputs.cpp mynewoutput -lncurses`
+
+  **Output 2:**
+
+  `mynewoutput`  *# Executable created with ncurses linked*
+
+## Running the Executable
+
+### grun
+
+The grun function simplifies running the compiled executable.
+
+- Run the Executable:
+
+  `grun <executable_file>`
+
+  This runs the specified executable file.
+
+  **Example:**
+
+  `grun inputs`
+
+  **Output:**
+
+  The program output will be displayed in the terminal.
+
+### Compiling for Windows
+
+- Compile for Windows with Default Output Name
+
+  `gexe <input_file>`
+
+  This compiles the <input_file> and creates a Windows executable with the same name (without the extension).
+
+  **Example:**
+
+  `gexe inputs.cpp`
+
+  **Output:**
+
+  `inputs.exe`  *# Executable created for Windows*
+
+- Compile for Windows with Specified Output Name:
+
+  `gexe <input_file> <output_file>`
+
+  This compiles the `<input_file>` and creates an executable with the specified `<output_file>` name.
+
+  **Example:**
+
+  `gexe inputs.cpp mynewoutput.exe`
+
+  **Output:**
+
+  `mynewoutput.exe`  *# Executable created for Windows*
+
+- Compile for Windows with Additional Arguments:
+
+  `gexe <input_file> [output_file] [additional_args]`
+
+  This compiles the `<input_file>`, optionally specifies the `<output_file>`, and includes any additional arguments such as linking Windows-specific libraries.
+
+  **Example:**
+
+  `gexe inputs.cpp mynewoutput.exe -static-libgcc -static-libstdc++`
+
+  **Output:**
+
+  `mynewoutput.exe` *# Executable created with static libraries linked*
+
+Additional Information
+
+- Arguments Handling: The gcompile function checks the number of arguments and processes them accordingly. It identifies whether an output file name is provided or if additional arguments (such as linking flags) are present.
+- Debugging Information: The -g flag is included by default to add debugging information to the executable.
+
+By following these instructions, you can streamline the process of compiling C++ programs with custom configurations using the gcompile function and easily run them using the grun function.
